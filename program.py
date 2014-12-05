@@ -1,28 +1,19 @@
 from random import randint
 
 def optimalFind(list):
-    min = list[0]
-    max = list[0]
-    if len(list)%2 == 0:
-        list.append(min)
-    range = len(list)
-    i = 1
-    while i < range:
-        if list[i] < list[i+1]:
-            if list[i] < min:
-                min = list[i]
-            if list[i+1] > max:
-                max = list[i+1]
+    tmin = list[0]
+    tmax = list[0]
+    for i,j in zip(list[0::2], list[1::2]):
+        if i < j:
+            tmin = min(tmin, i)
+            tmax = max(tmax, j)
         else:
-            if list[i+1] < min:
-                min = list[i+1]
-            if list[i] > max:
-                max = list[i]
-        i += 2
-
-    return (min, max)
+            tmin = min(tmin, j)
+            tmax = max(tmax, i)
+    return (tmin, tmax)
 
 
-list = [randint(1,10000) for i in range(1000000)]
+elements = 1000000
+list = [randint(-1000,10000) for i in range(elements)]
 result = optimalFind(list)
 print("Min: ",result[0],  "Max: ", result[1])
