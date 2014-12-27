@@ -3,6 +3,8 @@ from random import randint
 def optimalFind(list):
     tmin = list[0]
     tmax = list[0]
+    if len(list)%2 != 0:
+        list.append(list[0])
     for i,j in zip(list[0::2], list[1::2]):
         if i < j:
             tmin = min(tmin, i)
